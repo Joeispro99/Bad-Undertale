@@ -21,6 +21,7 @@ clock = pygame.time.Clock()
 heartImage = pygame.image.load('heart.png')
 sansImage = pygame.image.load('sans.png')
 boneWave = pygame.image.load('bonewave.png')
+boneImage = pygame.image.load('bone.png')
 
 heart_width = 32
 heart_height = 32
@@ -113,11 +114,21 @@ def boneattack2(boneyspeed):
                 if event.key == pygame.K_UP or event.key == pygame.K_DOWN or event.key == pygame.K_w or event.key == pygame.K_s:
                     y_change = 0
                 
-        x += x_change
-        y += y_change
+        if x <= 10:
+            x += 1
+        elif x >= 750:
+            x -= 1
+        else:
+            x+=x_change
+        if y <= 10:
+            y+=1
+        elif y >= 550:
+            y-=1
+        else:
+            y += y_change
 
         gameDisplay.fill(black)
-        pygame.draw.polygon(gameDisplay, white, ((bonex+37.5,boney+75),(bonex+62.5,boney+75),(bonex+62.5,boney+125),(bonex+12.5,boney+125),(bonex+12.5,boney+100),(bonex-37.5,boney+100),(bonex-37.5,boney+125),(bonex-87.5,boney+125),(bonex-87.5,boney+75),(bonex-62.5,boney+75),(bonex-62.5,boney-75),(bonex-87.5,boney-75),(bonex-87.5,boney-125),(bonex-37.5,boney-125),(bonex-37.5,boney-100),(bonex+12.5,boney-100),(bonex+12.5,boney-125),(bonex+62.5,boney-125),(bonex+62.5,boney-75),(bonex+37.5,boney-75)))
+        gameDisplay.blit(boneImage,(bonex,boney))
         gameDisplay.blit(heartImage,(x,y))
         gameDisplay.blit(sansImage,(355,50))
         bonex += 0
@@ -130,4 +141,4 @@ def boneattack2(boneyspeed):
         pygame.display.update()
         clock.tick(60)
 sans_intro(20)
-boneattack2(100)
+boneattack2(50)
